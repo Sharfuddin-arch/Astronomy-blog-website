@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wonders Of Galaxies</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.6;
+            filter: brightness(0.8);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #fff, 0 0 20px #9d00ff, 0 0 30px #7b00ff;
+            animation: galaxyPulse 5s infinite alternate;
+            letter-spacing: 3px;
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+
+        h1:hover {
+            transform: translateY(-5px);
+            text-shadow: 0 0 15px #fff, 0 0 25px #9d00ff, 0 0 35px #7b00ff, 0 0 45px #5a00ff;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1.5rem auto;
+            max-width: 800px;
+            text-shadow: 0 0 5px rgba(157, 0, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border-top: 2px solid #9d00ff;
+            border-bottom: 2px solid #7b00ff;
+            transform: perspective(500px) rotateX(0deg);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        p:hover {
+            transform: perspective(500px) rotateX(3deg);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+        }
+
+        p::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        p:hover::before {
+            left: 100%;
+        }
+
+        @keyframes galaxyPulse {
+            0% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #9d00ff, 0 0 30px #7b00ff;
+                transform: scale(1);
+            }
+            100% {
+                text-shadow: 0 0 15px #fff, 0 0 25px #9d00ff, 0 0 35px #7b00ff, 0 0 45px #5a00ff;
+                transform: scale(1.03);
+            }
+        }
+
+       
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: float linear infinite;
+            z-index: 0;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+      
+        .twinkle {
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            to {
+                opacity: 0.3;
+            }
+        }
+
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="videos/galaxy 1.mp4" type="video/mp4">
+        
+        <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Galaxy background">
+    </video>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            const starCount = 30;
+            
+            for (let i = 0; i < starCount; i++) {
+                createStar();
+            }
+            
+            function createStar() {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+              
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.bottom = `${Math.random() * 20}px`;
+                
+                
+                const duration = Math.random() * 20 + 10;
+                star.style.animationDuration = `${duration}s`;
+                
+                
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+            
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+              
+                if (Math.random() > 0.7) {
+                    star.classList.add('twinkle');
+                    star.style.animationDuration = `${Math.random() * 3 + 1}s`;
+                }
+                
+                container.appendChild(star);
+                
+                
+                setTimeout(() => {
+                    star.remove();
+                    createStar();
+                }, duration * 1000);
+            }
+        });
+    </script>
+
+    <div class="content">
+        <h1>The Wonders of Galaxies</h1>
+        <p>Galaxies are vast systems of stars, gas, dust, and dark matter, bound together by gravity. They are the fundamental building blocks of the universe and come in a wide range of shapes and sizes. Some galaxies, like the Milky Way, are spiral-shaped, while others, such as elliptical galaxies, have a more oval or spherical appearance. The study of galaxies provides essential information about the formation, evolution, and dynamics of the cosmos.</p>
+        <p>Our Milky Way galaxy is a barred spiral galaxy, home to our solar system and billions of other stars. It spans over 100,000 light-years in diameter and contains a supermassive black hole at its center. The Milky Way is just one of many galaxies in the observable universe, which contains billions of galaxies scattered across vast distances. Astronomers use powerful telescopes to observe galaxies, helping us understand their structure and behavior over time.</p>
+        <p>Galaxies can collide and merge, resulting in the formation of new stars and the redistribution of gas and dust. These cosmic events can trigger bursts of star formation, creating new stellar populations. Some galaxies, like the Andromeda Galaxy, are on a collision course with our own Milky Way, with the two galaxies expected to merge in a few billion years. Studying galaxy mergers provides valuable insights into the growth and evolution of galaxies throughout the universe.</p>
+        <p>In addition to their stars, galaxies also contain vast amounts of dark matter, an invisible substance that makes up most of the galaxy's mass. While dark matter cannot be directly observed, its presence is inferred from its gravitational effects on visible matter. Understanding dark matter is one of the most significant challenges in modern astronomy. Galaxies also harbor supermassive black holes at their centers, which have a profound influence on their evolution and dynamics.</p>
+    </div>
+
+</body>
+</html>

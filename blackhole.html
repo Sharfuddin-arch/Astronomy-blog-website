@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Enigma Of Black Holes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #fff, 0 0 20px #00bfff, 0 0 30px #0080ff;
+            animation: pulse 4s infinite alternate;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1.5rem auto;
+            max-width: 800px;
+            text-shadow: 0 0 5px rgba(0, 191, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid #00bfff;
+            transform: perspective(500px) rotateX(0deg);
+            transition: transform 0.5s ease;
+        }
+
+        p:hover {
+            transform: perspective(500px) rotateX(5deg);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+        }
+
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #00bfff, 0 0 30px #0080ff;
+            }
+            100% {
+                text-shadow: 0 0 15px #fff, 0 0 25px #00bfff, 0 0 35px #0080ff, 0 0 45px #0066ff;
+            }
+        }
+
+     
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+     
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="videos/black hole.mp4" type="video/mp4">
+       
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Black hole background">
+    </video>
+
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            const starCount = 20;
+            
+            for (let i = 0; i < starCount; i++) {
+                createStar();
+            }
+            
+            function createStar() {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+         
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+             
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * -100}px`;
+                
+                
+                const duration = Math.random() * 10 + 5;
+                star.style.animationDuration = `${duration}s`;
+                
+          
+                star.style.opacity = Math.random() * 0.5 + 0.5;
+                
+                container.appendChild(star);
+                
+                
+                setTimeout(() => {
+                    star.remove();
+                    createStar();
+                }, duration * 1000);
+            }
+        });
+    </script>
+
+    <div class="content">
+        <h1>The Enigma of Black Holes</h1>
+        <p>Black holes are among the most mysterious and intriguing objects in the universe. They are regions of space where gravity is so intense that nothing, not even light, can escape. Black holes form when massive stars collapse under their own gravity at the end of their life cycles. The resulting singularity is surrounded by an event horizon, the boundary beyond which nothing can return. Their enigmatic nature has made black holes a subject of intense study in astrophysics.</p>
+        <p>The size of a black hole can vary greatly, from stellar-mass black holes formed by the collapse of individual stars, to supermassive black holes found at the centers of most galaxies, including our Milky Way. Supermassive black holes contain the mass of millions to billions of suns and play a significant role in the dynamics and evolution of galaxies. Observing the behavior of stars and gas around black holes has helped scientists understand their properties and the fundamental laws of physics.</p>
+        <p>One of the most fascinating phenomena associated with black holes is the accretion disk. This is a rotating disk of gas and dust that spirals into the black hole, heating up and emitting powerful radiation in the process. Some black holes also produce relativistic jets, which are high-energy streams of particles ejected from the poles of the black hole. These jets can extend across millions of light-years and are among the most energetic phenomena in the universe.</p>
+        <p>While black holes are invisible, their presence can be detected through their gravitational effects on nearby matter. For instance, the motion of stars in the vicinity of a black hole can reveal its mass and location. The first-ever direct image of a black hole was captured in 2019 by the Event Horizon Telescope, showcasing the shadow of a supermassive black hole in the galaxy M87. This landmark achievement marked a significant step forward in our understanding of these cosmic enigmas.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Study of Astronomy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: rgba(26, 26, 26, 0.9);
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 1000;
+            transform: translateY(-100%);
+            animation: slideDown 0.8s ease-out forwards 0.3s;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #4dabf7;
+        }
+
+        header h1 {
+            font-size: 28px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #4dabf7;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4dabf7;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .video-container {
+            position: relative;
+            top: 60px;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 0.5s;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .info-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 100px auto 50px;
+            max-width: 90%;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 0.8s;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .info-boxes::-webkit-scrollbar {
+            display: none;
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 250px;
+            min-width: 250px;
+            flex: 0 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+
+        .info-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(77, 171, 247, 0.3);
+        }
+
+        .info-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .info-box:hover img {
+            transform: scale(1.03);
+        }
+
+        .info-box h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #4dabf7;
+        }
+
+        .info-box p {
+            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp : 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.3);
+            margin-top: auto;
+            width: fit-content;
+            align-self: center;
+        }
+
+        .info-box a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(77, 171, 247, 0.5);
+        }
+
+        .slider {
+            overflow: hidden;
+            margin: 60px auto;
+            max-width: 100%;
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 1.1s;
+        }
+
+        .slider-track {
+            display: flex;
+            animation: slide 30s linear infinite;
+        }
+
+        .slider-track img {
+            width: 550px;
+            height: 300px;
+            margin-right: 25px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .slider-track img:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .paragraphs {
+            margin: 60px auto;
+            max-width: 1000px;
+            line-height: 1.8;
+            text-align: justify;
+            padding: 0 40px;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 1.4s;
+        }
+
+        .paragraphs p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            background: rgba(30, 30, 30, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-left: 5px solid #4dabf7;
+            transition: all 0.5s ease;
+        }
+
+        .paragraphs p:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(77, 171, 247, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 70px 0 50px;
+            font-size: 36px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+            border-radius: 2px;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #111, #1a1a1a);
+            padding: 80px 40px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 1.7s;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/1.jpeg') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1300px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 350px;
+            background: rgba(30, 30, 30, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+            transition: transform 0.5s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-info h3 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #fff;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+            border-radius: 2px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: #4dabf7;
+            margin-top: 5px;
+        }
+
+        .contact-text p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .contact-text a {
+            color: #4dabf7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-text a:hover {
+            color: #a18cd1;
+            text-decoration: underline;
+        }
+
+        .map-container {
+            flex: 1;
+            min-width: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            transition: transform 0.5s ease;
+            height: 450px;
+        }
+
+        .map-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4dabf7, #a18cd1);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.3);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(77, 171, 247, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #0a0a0a, #111);
+            transform: translateY(100px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 2s;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+        }
+
+        footer p {
+            font-size: 18px;
+            margin: 0;
+            color: #aaa;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .info-boxes {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .slider-track img {
+                width: 450px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .video-container {
+                height: 60vh;
+            }
+            
+            .info-box {
+                width: 250px;
+                min-width: 250px;
+                height: auto;
+            }
+            
+            .slider-track img {
+                width: 300px;
+                height: 180px;
+            }
+            
+            .paragraphs {
+                padding: 0 20px;
+            }
+            
+            .paragraphs p {
+                font-size: 18px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Study of Astronomy</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="videos/229467.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="info-boxes">
+        <div class="info-box">
+            <img src="images/5.jpeg" alt="Nebula">
+            <h2>Nebula</h2>
+            <p>Cosmic clouds where stars are born, glowing with ionized gases or reflecting starlight. The Orion Nebula reveals fascinating star formation processes in stunning detail across light-years.</p>
+            <a href="nebula.html" class="btn btn-primary">Explore Nebulae</a>
+        </div>
+        
+        <div class="info-box">
+            <img src="images/8.jpeg" alt="Stars">
+            <h2>Stars</h2>
+            <p>Massive luminous spheres of plasma held by gravity, ranging from tiny red dwarfs to massive blue supergiants. Our Sun is a typical G-type star undergoing nuclear fusion.</p>
+            <a href="stars.html" class="btn btn-primary">Discover Stars</a>
+        </div>
+
+        <div class="info-box">
+            <img src="images/abstract-galaxy-explodes-bright-multi-colored-wave-computer-graphics-generated-by-ai.jpg" alt="Black Hole">
+            <h2>Black Holes</h2>
+            <p>Extreme warping of spacetime with gravity so intense nothing escapes, not even light. Form when massive stars collapse, with supermassive versions at galaxy centers.</p>
+            <a href="blackhole.html" class="btn btn-primary">Unravel Mysteries</a>
+        </div>
+    
+        <div class="info-box">
+            <img src="images/pexels-luisfe-5191961.jpg" alt="Galaxy">
+            <h2>Galaxy</h2>
+            <p>Vast cosmic islands containing billions of stars. Our Milky Way is a barred spiral 100,000 light-years across. Galaxies come in spirals, ellipticals, and irregular forms.</p>
+            <a href="galaxy.html" class="btn btn-primary">Tour Galaxies</a>
+        </div>
+    </div>
+
+    <div class="slider">
+        <div class="slider-track">
+            <img src="images/1.jpeg" alt="Astronomy Image 1">
+            <img src="images/3.jpeg" alt="Astronomy Image 2">
+            <img src="images/4.jpg" alt="Astronomy Image 3">
+            <img src="images/6.jpeg" alt="Astronomy Image 4">
+            <img src="images/7.jpeg" alt="Astronomy Image 5">
+            <img src="images/pexels-ahmad-basem-739226667-29214035.jpg" alt="Astronomy Image 6">
+            <img src="images/5.jpeg" alt="Astronomy Image 7">
+            <img src="images/8.jpeg" alt="Astronomy Image 8">
+        </div>
+    </div>
+
+    <div class="paragraphs">
+        <h2 class="section-title">Cosmic Wonders</h2>
+        <p>The study of nebulae reveals the birthplace of stars, where dense regions within these clouds collapse under gravity to form protostars. The famous Pillars of Creation in the Eagle Nebula showcase this spectacular process. Nebulae also serve as cosmic recycling centers, enriched by material from dying stars that will form new stellar generations. Their vibrant colors come from different elements - red from hydrogen, blue from oxygen, and green from sulfur, creating nature's most magnificent light shows across the galaxy.</p>
+
+        <h2 class="section-title">Stellar Evolution</h2>
+        <p>Stars follow predictable life cycles determined by their mass. Low-mass stars like red dwarfs burn slowly for trillions of years, while massive stars live fast and die young in spectacular supernovae. The Hertzsprung-Russell diagram classifies stars by luminosity and temperature, revealing patterns in stellar evolution. Variable stars pulsate in brightness, providing cosmic distance markers. Binary star systems demonstrate gravitational interactions, with some transferring mass between companions, creating novae and X-ray binaries.</p>
+
+        <h2 class="section-title">Gravity's Ultimate Victory</h2>
+        <p>Black holes challenge our understanding of physics, with singularities where known laws break down. Their event horizons mark the point of no return, while accretion disks of superheated matter emit intense radiation before disappearing forever. Supermassive black holes power quasars, the universe's brightest objects. Hawking radiation suggests black holes slowly evaporate over cosmic timescales. Gravitational wave astronomy has opened new windows into studying black hole mergers, detecting ripples in spacetime itself.</p>
+
+        <h2 class="section-title">Island Universes</h2>
+        <p>Galaxies evolve through mergers and collisions, with the Milky Way destined to combine with Andromeda in about 4 billion years. Spiral galaxies like ours contain young stars in their arms and older populations in central bulges. Elliptical galaxies, more common in dense clusters, contain older stars and little gas. Dark matter comprises about 85% of galaxies' mass, revealed by rotation curves. Active galaxies with supermassive black holes can outshine their entire stellar populations, powering jets that extend millions of light-years.</p>
+    </div>
+
+    <div id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p><strong>Address:</strong> Main Campus, Sector 7/B, Gulshan-e-Iqbal, Karachi, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p><strong>Phone:</strong> <a href="tel:+922134830521">+92 (21) 34830521-5</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p><strong>Email:</strong> <a href="mailto:info.gulshan@iqra.edu.pk">info.gulshan@iqra.edu.pk</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p><strong>Hours:</strong> Monday-Friday: 8:30am-5:30pm<br>Saturday: 9:00am-2:00pm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.244330807569!2d67.0999683150069!3d24.89170898403861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f3a6e4f0b0d%3A0x7b7d1a5a6e3c4b1e!2sIqra%20University%20Gulshan%20Campus!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 The Study of Astronomy. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html>

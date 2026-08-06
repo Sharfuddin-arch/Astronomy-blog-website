@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Astronomy Hub</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1, p {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(40%);
+        }
+
+        .contact-container {
+            margin: 40px auto;
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .contact-info i {
+            color: #ff5733;
+            margin-right: 10px;
+        }
+
+        .contact-form {
+            margin-top: 20px;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .contact-form input::placeholder, 
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-form button {
+            padding: 12px 20px;
+            background: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background: #ff2e00;
+            transform: scale(1.05);
+        }
+
+        .slider {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            white-space: nowrap;
+            margin-top: 30px;
+        }
+
+        .slider-track {
+            display: flex;
+            animation: scroll 10s linear infinite;
+            width: 200%;
+        }
+
+        .slider-track img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 12px 20px;
+            background: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .home-btn:hover {
+            background: #ff2e00;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="videos/857136-hd_1280_720_24fps.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <h1>Contact Us</h1>
+    <p>"Have questions about the universe or need assistance with our services? Reach out to us using the details below or fill out the form, and our team will get back to you soon!"</p>
+
+    <div class="contact-container">
+        <p class="contact-info"><i>📍</i> Address: House No.ABC</p>
+        <p class="contact-info"><i>📧</i> Email: syedsharf18@gmail.com</p>
+        <p class="contact-info"><i>📞</i> Phone: 0311-3709116</p>
+    </div>
+
+    <div class="contact-container">
+        <h2>Send Us a Message</h2>
+        <form action="your-server-endpoint" method="post" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <div class="slider">
+        <div class="slider-track">
+            <img src="images/new8.jpg" alt="">
+            <img src="images/new9.jpg" alt="">
+            <img src="images/new10.jpg" alt="">
+            <img src="images/new11.jpg" alt="">
+            
+            <img src="images/new8.jpg" alt="">
+            <img src="images/new9.jpg" alt="">
+            <img src="images/new10.jpg" alt="">
+            <img src="images/new11.jpg" alt="">
+        </div>
+    </div>
+
+    <a href="astro.html" class="home-btn">Back Home</a>
+
+</body>
+</html>

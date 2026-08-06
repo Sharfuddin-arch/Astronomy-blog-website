@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula - The Cosmic Clouds</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+            filter: hue-rotate(10deg) contrast(1.1);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #9d00ff;
+            animation: nebulaPulse 6s infinite alternate;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ff00ff, #9d00ff, #00bfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 0 20px;
+            border-radius: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1.5rem auto;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 0, 255, 0.3);
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        p:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(157, 0, 255, 0.4);
+            border-color: rgba(0, 191, 255, 0.5);
+        }
+
+        p::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                      transparent, 
+                      rgba(157, 0, 255, 0.1), 
+                      rgba(0, 191, 255, 0.1), 
+                      transparent);
+            z-index: -1;
+        }
+
+        @keyframes nebulaPulse {
+            0% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #9d00ff;
+                transform: scale(1);
+            }
+            50% {
+                text-shadow: 0 0 15px #fff, 0 0 25px #ff00ff, 0 0 35px #9d00ff, 0 0 45px #00bfff;
+            }
+            100% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #00bfff, 0 0 30px #9d00ff;
+                transform: scale(1.03);
+            }
+        }
+
+        /* Floating cosmic particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                      rgba(255,255,255,0.8) 0%, 
+                      rgba(157,0,255,0.5) 50%, 
+                      transparent 70%);
+            filter: blur(1px);
+            animation: floatParticle linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                padding: 0 15px;
+            }
+            
+            p {
+                font-size: 1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="videos/nebula vd.mp4" type="video/mp4">
+       
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nebula background">
+    </video>
+
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                createParticle();
+            }
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.bottom = `${Math.random() * 20}px`;
+                
+                
+                const duration = Math.random() * 25 + 15;
+                particle.style.animationDuration = `${duration}s`;
+                
+               
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                
+               
+                particle.style.background = `radial-gradient(circle, 
+                    rgba(255,255,255,0.8) 0%, 
+                    hsla(${hue}, 100%, 50%, 0.5) 50%, 
+                    transparent 70%)`;
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                    createParticle();
+                }, duration * 1000);
+            }
+        });
+    </script>
+
+    <div class="content">
+        <h1>The Beauty of Nebulae</h1>
+        <p>Nebulae are among the most breathtaking structures in space, consisting of vast clouds of gas and dust. They serve as the birthplaces of stars, where gravity pulls material together to ignite nuclear fusion. These cosmic formations come in various shapes and colors, creating mesmerizing celestial landscapes. Some nebulae glow brightly due to the ionization of gases, while others appear dark, absorbing light from stars behind them. Their beauty and mystery continue to captivate astronomers and space enthusiasts alike.</p>
+        <p>The Orion Nebula, one of the most famous nebulae, is visible to the naked eye from Earth. Located in the Milky Way, it serves as a stellar nursery where new stars emerge. Scientists study it to understand how stars and planetary systems form from interstellar material. Observations of the Orion Nebula have revealed young, hot stars illuminating the surrounding gas. This makes it a prime target for telescopes like Hubble and James Webb.</p>
+        <p>Nebulae can be classified into different types based on their composition and behavior. Emission nebulae, like the Eagle Nebula, glow due to high-energy radiation from nearby stars. Reflection nebulae, such as the Witch Head Nebula, shine by scattering the light of nearby stars. Planetary nebulae, despite their name, have nothing to do with planets; they are created when dying stars expel their outer layers. Each type contributes valuable insights into the life cycles of stars.</p>
+        <p>Supernova remnants are another fascinating type of nebula, formed after a massive star explodes. The Crab Nebula, a famous example, originated from a supernova recorded by Chinese astronomers in 1054. These remnants are rich in elements that later form new stars, planets, and even life. The explosion disperses heavy elements like carbon and oxygen into space, enriching future star-forming regions. This cosmic recycling process plays a crucial role in the evolution of galaxies.</p>
+    </div>
+
+</body>
+</html>

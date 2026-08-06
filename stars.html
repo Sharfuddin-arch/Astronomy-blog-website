@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Of Stars</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.6;
+            filter: brightness(0.8) contrast(1.2);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ffcc00, 0 0 30px #ff9900;
+            animation: starPulse 4s infinite alternate;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ffcc00, #ff9900, #ff6600);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 0 20px;
+            transition: all 0.5s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px #fff, 0 0 25px #ffcc00, 0 0 35px #ff9900;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1.5rem auto;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        p:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+            border-color: rgba(255, 153, 0, 0.5);
+        }
+
+        p::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                      transparent, 
+                      rgba(255, 204, 0, 0.1), 
+                      rgba(255, 153, 0, 0.1), 
+                      transparent);
+            transition: 0.5s;
+        }
+
+        p:hover::before {
+            left: 100%;
+        }
+
+        @keyframes starPulse {
+            0% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ffcc00, 0 0 30px #ff9900;
+            }
+            100% {
+                text-shadow: 0 0 15px #fff, 0 0 25px #ffcc00, 0 0 35px #ff9900, 0 0 45px #ff6600;
+            }
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+      
+        .shooting-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, transparent, white);
+            animation: shoot linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+      
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                padding: 0 15px;
+            }
+            
+            p {
+                font-size: 1rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="videos/stars.mp4" type="video/mp4">
+        
+        <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Stars background">
+    </video>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            
+            const starCount = 50;
+            for (let i = 0; i < starCount; i++) {
+                createStar();
+            }
+            
+          
+            setInterval(createShootingStar, 3000);
+            
+            function createStar() {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+               
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                
+               
+                const duration = Math.random() * 5 + 3;
+                star.style.animationDuration = `${duration}s`;
+                
+              
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+              
+                star.style.opacity = Math.random();
+                
+                container.appendChild(star);
+            }
+            
+            function createShootingStar() {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                
+             
+                shootingStar.style.left = `${Math.random() * 30}vw`;
+                shootingStar.style.top = `${Math.random() * 30}vh`;
+                
+               
+                const duration = Math.random() * 2 + 1;
+                shootingStar.style.animationDuration = `${duration}s`;
+                
+                
+                const length = Math.random() * 100 + 50;
+                shootingStar.style.width = `${length}px`;
+                
+                container.appendChild(shootingStar);
+                
+               
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, duration * 1000);
+            }
+        });
+    </script>
+
+    <div class="content">
+        <h1>The Mysteries of Stars</h1>
+        <p>Stars are luminous balls of gas, primarily composed of hydrogen and helium, undergoing nuclear fusion. They are the building blocks of galaxies and the sources of energy that sustain life on planets like Earth. Stars form from clouds of gas and dust, just like nebulae, and go through various stages in their lifecycle. Depending on their mass, stars can burn for millions to billions of years before they either collapse into a dense object or explode as a supernova.</p>
+        <p>Our Sun, a medium-sized star, is the closest star to Earth and the source of light and warmth for our planet. It is located at the center of the Solar System, and its energy drives most processes on Earth, including weather patterns and photosynthesis in plants. The study of stars like the Sun helps scientists understand the fundamental processes of stellar evolution and the behavior of stars over time.</p>
+        <p>Stars are categorized based on their size, temperature, and luminosity. Main sequence stars, like the Sun, burn hydrogen in their cores, and they are the most common type in the universe. Giant and supergiant stars, such as Betelgeuse, are much larger and more luminous, while white dwarfs are the remnants of smaller stars that have exhausted their nuclear fuel. The diversity of star types provides astronomers with valuable data to understand the composition and dynamics of the universe.</p>
+        <p>The death of a star is a dramatic event that can result in the creation of exotic objects like black holes or neutron stars. A massive star ends its life in a supernova explosion, scattering heavy elements into space. These elements then become part of the interstellar medium, enriching future generations of stars and planets. This cycle of birth, life, and death plays a vital role in the evolution of galaxies and the formation of new cosmic structures.</p>
+    </div>
+</body>
+</html>

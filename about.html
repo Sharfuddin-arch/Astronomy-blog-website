@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Astronomy Wonders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 40px 0 20px;
+            background: linear-gradient(90deg, #4dabf7, #a18cd1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards 0.3s;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards 0.5s;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin: 20px auto 40px;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #ff5733, #ff2e00);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 87, 51, 0.4);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards 0.7s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 87, 51, 0.6);
+        }
+
+        .home-btn i {
+            margin-right: 8px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 400px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(77, 171, 247, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards 0.9s;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%) contrast(110%);
+        }
+
+        .slider-container {
+            width: 100%;
+            margin: 60px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #a18cd1, #4dabf7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards 1.1s;
+        }
+
+        .slider {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards 1.3s;
+        }
+
+        .slider-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            width: calc(250px * 12);
+        }
+
+        .slider-track img {
+            width: 350px;
+            height: 200px;
+            margin: 0 15px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .slider-track img:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-250px * 6));
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .video-container {
+                height: 300px;
+            }
+            
+            .slider-track img {
+                width: 280px;
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .video-container {
+                height: 200px;
+            }
+            
+            .slider-track img {
+                width: 220px;
+                height: 130px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>About Us</h1>
+    <p>"Welcome to the wonders of the universe! Our astronomy website is your gateway to exploring the vast cosmos, from distant galaxies to the mysteries of black holes. Whether you're a student, an amateur stargazer, or a space enthusiast, we provide engaging content, stunning visuals, and expert insights to fuel your curiosity about the night sky. Learn about planets, stars, and cosmic phenomena while staying updated on the latest astronomical discoveries. Join us as we embark on a journey beyond Earth, uncovering the secrets of the universe one star at a time!"</p>
+    
+    <a href="astro.html" class="home-btn"><i class="fas fa-arrow-left"></i> Back Home</a>
+
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="videos/8474629-hd_1920_1080_30fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="slider-container">
+        <h2 class="slider-title">Explore the Cosmos</h2>
+        <div class="slider">
+            <div class="slider-track">
+                <img src="images/new.jpg" alt="Galaxy image">
+                <img src="images/new1.jpg" alt="Nebula image">
+                <img src="images/new2.jpg" alt="Star cluster">
+                <img src="images/new3.jpg" alt="Solar system">
+                <img src="images/new.jpg" alt="Galaxy image">
+                <img src="images/new1.jpg" alt="Nebula image">
+                <img src="images/new2.jpg" alt="Star cluster">
+                <img src="images/new3.jpg" alt="Solar system">
+                <img src="images/new.jpg" alt="Galaxy image">
+                <img src="images/new1.jpg" alt="Nebula image">
+                <img src="images/new2.jpg" alt="Star cluster">
+                <img src="images/new3.jpg" alt="Solar system">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
